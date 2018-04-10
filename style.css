@@ -1,0 +1,13 @@
+.block {
+	width: 100px;
+	height: 100px;
+    background-color: lightgrey;
+}
+
+.true {
+	background-color: green;
+}
+
+.false{
+	background-color: red;
+}
