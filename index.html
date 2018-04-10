@@ -1,0 +1,42 @@
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>testing</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="app">
+    <h1>{{ title }}</h1>
+    <div class="block" :class="{false: !successRate, true: successRate}" style="text-align: center;">{{ successRate }}</div>
+    <button v-on:click="checkSuccess">click me</button>
+    <input v-on:keydown.enter="changeUrl">
+    <p>{{ url }}</p>
+</div>
+</body>
+</html>
+
+<script>
+    const urlbase = 'https://19tztqev18.execute-api.us-west-2.amazonaws.com/dev/tag?id='
+    var app = new Vue({
+        el: '#app',
+        data: {  
+          url: urlbase + 'mark',
+          title: 'Fetching',  
+          successRate: ''
+        },
+        methods: {   
+          checkSuccess: function(){
+            let vm = this;
+            console.log('I am running')
+            fetch(this.url)
+              .then(response => response.json())
+                .then(myJson => vm.successRate = myJson.success)
+          },
+          changeUrl: function(event){
+            return this.url = urlbase + event.target.value 
+          }
+        }
+    });
+</script>
+
